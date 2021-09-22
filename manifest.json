@@ -1,0 +1,26 @@
+{
+
+  "description": "NTUA MyCourses mass file downloader",
+  "manifest_version": 2,
+  "name": "MyCourses File Downloader",
+  "version": "0.1.5",
+  "author": "Tasos Bithas",
+  "homepage_url": "https://github.com/tasosb/myc-downloader",
+  
+  "icons": {
+    "16": "/images/ntua16.png",
+    "32": "/images/ntua32.png",
+    "48": "/images/ntua48.png",
+    "128": "/images/ntua128.png"
+  },
+  "permissions": ["storage", "activeTab"],
+
+  "content_scripts": [
+    {
+      "matches": ["http://mycourses.ntua.gr/document/document.php*","https://mycourses.ntua.gr/document/document.php*"],
+      "run_at": "document_end",
+      "js": ["jszip.js","jszip-utils.js","sas.js","main.js"]
+    }
+  ]
+
+}
