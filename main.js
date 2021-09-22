@@ -183,8 +183,13 @@ function zipfiles(linklist) {
         if (count == down_count) {
           button.innerHTML = "<i class='fa fa-spinner fa-spin'></i> Zipping files";
           zip.generateAsync({
-              type: "blob"
-            })
+              type: "blob",
+              compression: "DEFLATE",
+              streamFiles: true,
+              compressionOptions: {
+                level: 5
+              }
+            },updatePercent)
             .then(function(blob) {
               saveAs(blob, zipFilename);
               button.innerHTML = "<i class='fa fa-check'></i> Ready!";
@@ -194,6 +199,15 @@ function zipfiles(linklist) {
     }
   });
 }
+
+function updatePercent(metaData) {
+  const percent = metaData.percent;
+  
+  setTimeout(function() { 
+     //console.log(percent);
+     button.innerText = "Zipping files ("+ percent.toFixed(2) + " %)";
+  }, 50);
+  }
 async function main(button) {
   console.log("Running...")
   // Ok, let's go, first disable the button to make sure that the script doesn't run twice
