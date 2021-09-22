@@ -3,7 +3,7 @@
   "description": "NTUA MyCourses mass file downloader",
   "manifest_version": 2,
   "name": "MyCourses File Downloader",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "author": "Tasos Bithas",
   "homepage_url": "https://github.com/tasosb/myc-downloader",
   
