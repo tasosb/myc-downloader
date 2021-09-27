@@ -1,6 +1,8 @@
 # MyCourses File Downloader (myc-downloader)
 
-MyCourses File Downloader is a browser plugin written in Javascript that enables users to mass-download course documents from the MyCourses application of the National Technical University of Athens (NTUA).
+https://user-images.githubusercontent.com/18355854/134958364-2c902129-21b4-448d-be7e-80f658f8c348.mp4
+
+MyCourses File Downloader is a browser plugin written in Javascript that enables users to mass-download course documents and files from the MyCourses application of the National Technical University of Athens (NTUA).
 
 ## Supported Browsers
 At the moment the plugin comes with a ready-to-use extension for the following browsers:
