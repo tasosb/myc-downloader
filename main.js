@@ -3,6 +3,7 @@ var todo = 0
 var complete = 0
 var availToDownload = [];
 var https_ret = 0;
+var waiting_to_download =0;
 
 
 function getlinks() {
@@ -102,7 +103,18 @@ function countdownloadables() {
   }
 }
 
-function addColumn() {
+async function addColumn() {
+  while(document.getElementsByName('documentstable_length').length<1){
+    await new Promise(r => setTimeout(r, 1000));
+  }
+  select = document.getElementsByName('documentstable_length')[0];
+  var opt = document.createElement('option');
+    opt.value = "1000";
+    opt.innerHTML = "1000";
+    select.appendChild(opt);
+  document.getElementsByName("documentstable_length")[0].selectedIndex=4
+  var event = new Event('change');
+  select.dispatchEvent(event);
   [...document.querySelectorAll('#documentstable tr')].forEach((row, i) => {
     if (i == 0) {
       const cell = document.createElement(i ? "td" : "th")
@@ -132,6 +144,7 @@ function switchCheckedUnchecked () {
 function folderopen() {
   for (i = 0; i < linklist.length; i++) {
     if (linklist[i][2] === 0 && linklist[i][3] === 0) {
+      waiting_to_download++
       linklist[i][3] = 1
       loadHTML(linklist[i]);
     }
@@ -235,8 +248,9 @@ async function main(button) {
       throw new Error("HTML-Only used")
     }
     // Check underlying folders if they exist, find new files/folders
-    while (assertHasFolder()) {
+    while (assertHasFolder() || waiting_to_download>complete) {
       folderopen()
+      button.innerText = "Processing files "+complete+"/"+waiting_to_download;
       await new Promise(r => setTimeout(r, 1000));
     }
     while (todo > complete) {
